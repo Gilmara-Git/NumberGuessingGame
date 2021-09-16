@@ -5,13 +5,13 @@ import {
     StyleSheet, 
     TouchableWithoutFeedback, 
     Keyboard, 
-    Button,
     Alert 
 } from 'react-native';
 
 import Theme from '../themes/themes';
 import GlobalStyles from '../src/global/global-styles'
 
+import DefaultButton from '../src/components/DefaultButton/DefaultButton'
 import Card from '../src/components/Card/Card';
 import Input from '../src/components/Input/Input';
 import NumberComponent from '../src/components/NumberComponent/NumberComponent';
@@ -53,10 +53,15 @@ const StartGameScreen = props => {
                                 <Text style={GlobalStyles.title}>Your Number</Text>
                                     <NumberComponent>{numberConfirmed}</NumberComponent> 
                                 <View style={styles.startButton}>
-                                    <Button 
+                                    <DefaultButton
+                                        color={Theme.colors.startButton}
+                                        title="START GAME"
+                                        onPress={props.onStartGame.bind(this, numberConfirmed)} 
+                                     /> 
+                                    {/* <Button 
                                         onPress={props.onStartGame.bind(this, numberConfirmed)} // {props.onStartGame(numberConfirmed)} He executed the function from HERE, instead of binding
                                         title="START GAME"
-                                    />
+                                    /> */}
                                 </View>   
                             </View>
                         </Card>
@@ -84,16 +89,20 @@ const StartGameScreen = props => {
                 
                     <View style={styles.buttonsContainer}>
                         <View style={styles.button}>
-                            <Button 
-                                color={Theme.colors.orange}
+                            <DefaultButton
                                 title="Reset"
-                                onPress={resetInputHandler} />
+                                color={Theme.colors.orange}
+                                onPress={resetInputHandler}
+                             />
+                          
                         </View>
                         <View style={styles.button}>
-                            <Button
-                                color={Theme.colors.olivedrab}                        
+                            <DefaultButton
                                 title="Confirm"
-                                onPress={confirmInputHandler} />
+                                color={Theme.colors.olivedrab}
+                                onPress={confirmInputHandler}  
+                            />
+                           
                         </View>
                     </View>
                 </Card>     
@@ -136,7 +145,8 @@ const styles = StyleSheet.create({
         padding: 15    
     },
     button:{
-        width: 100          
+        width: 100,
+            
     },
     confirmedBox:{
         marginTop:20,
@@ -150,7 +160,7 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     startButton:{
-        marginTop:10,
+        marginVertical:10,
     }
    
 })

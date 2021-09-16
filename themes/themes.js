@@ -3,7 +3,8 @@ export default {
         mainBlack: '#000011',
         mainBackground: '#f0f8ff',
         orange: '#ffa500',
-        olivedrab: '#6b8e23'
+        olivedrab: '#6b8e23',
+        startButton: '#4630EB'
 
     },
 

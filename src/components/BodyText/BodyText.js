@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: Theme.fonts.SansBold,
     fontSize: 35,
-    color: Theme.colors.mainBackground   
+    color: Theme.colors.mainBlack  
   },
 });
 

@@ -2,7 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { View, Text, StyleSheet, Button, Alert } from "react-native";
 
 import NumberComponent from "../src/components/NumberComponent/NumberComponent";
+import DefaultButton from '../src/components/DefaultButton/DefaultButton'
 import Card from "../src/components/Card/Card";
+import Theme from '../themes/themes'
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -62,14 +64,20 @@ const GameScreen = props => {
       <Text style={styles.oppGuess}>Opponent's Guess</Text>
       <NumberComponent>{currentComputerGuess}</NumberComponent>
       <Card style={styles.hintButtonsContainer}>
-        <Button
-          title="DOWN"
-          onPress={nextComputerGuessHandler.bind(this, "down")}
-        />
-        <Button
-          title="UP"
-          onPress={nextComputerGuessHandler.bind(this, "up")}
-        />
+        <View style={styles.downUp}>
+          <DefaultButton 
+              color={Theme.colors.startButton}            
+              title="DOWN"
+              onPress={nextComputerGuessHandler.bind(this, "down")}   
+          />
+        </View>
+        <View style={styles.downUp} >
+          <DefaultButton 
+            color={Theme.colors.startButton}       
+            title="UP"
+            onPress={nextComputerGuessHandler.bind(this, "up")}
+          />
+        </View>
       </Card>
     </View>
   );
@@ -87,11 +95,15 @@ const styles = StyleSheet.create({
   },
   hintButtonsContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     width: 200,
     maxWidth: "80%",
     marginTop: 20,
   },
+  downUp:{
+    width: '40%',
+    marginVertical: 10
+  }
 });
 
 export default GameScreen;

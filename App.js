@@ -60,6 +60,7 @@ export default function App() {
 
   let displayComponent;
   displayComponent = <StartGameScreen onStartGame={startGameHandler} />
+  // displayComponent = <GameOverScreen />
   
   if(userNumber && numberOfRounds <=0){  
     displayComponent = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler}/>

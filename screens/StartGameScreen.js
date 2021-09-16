@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import Theme from '../themes/themes';
+import GlobalStyles from '../src/global/global-styles'
 
 import Card from '../src/components/Card/Card';
 import Input from '../src/components/Input/Input';
@@ -49,7 +50,7 @@ const StartGameScreen = props => {
     if(userConfirmed){
         ConfirmedOutput = <Card style={styles.confirmedBox}>
                             <View style={styles.numberInfoContainer}>
-                                <Text style={styles.numberTitle}>Your Number</Text>
+                                <Text style={GlobalStyles.title}>Your Number</Text>
                                     <NumberComponent>{numberConfirmed}</NumberComponent> 
                                 <View style={styles.startButton}>
                                     <Button 
@@ -107,12 +108,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex:1,
         padding:20 
-    },
-    title:{       
-        fontSize: 22,
-        marginVertical: 10,
-        fontFamily: Theme.fonts.MontSerratSemiBold
-    },
+    },   
     inputContainer:{
         marginTop: 15,
         alignItems: 'center',

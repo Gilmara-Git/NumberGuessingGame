@@ -9,7 +9,8 @@ const BodyText = (props) => {
 const styles = StyleSheet.create({
   text: {
     fontFamily: Theme.fonts.SansBold,
-    fontSize: 40,   
+    fontSize: 35,
+    color: Theme.colors.mainBackground   
   },
 });
 

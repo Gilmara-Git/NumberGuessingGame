@@ -8,10 +8,11 @@ const BodyText = (props) => {
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: Theme.fonts.SansBold,
+    fontFamily: Theme.fonts.MontSerratSemiBold,
     fontSize: 35,
-    color: Theme.colors.mainBlack  
+    color: Theme.colors.brightBlue  
   },
 });
 
 export default BodyText;
+

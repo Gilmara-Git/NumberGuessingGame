@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, Text, StyleSheet, Button, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
+import { AntDesign } from '@expo/vector-icons';
 
 import NumberComponent from "../src/components/NumberComponent/NumberComponent";
 import DefaultButton from '../src/components/DefaultButton/DefaultButton'
@@ -65,18 +66,27 @@ const GameScreen = props => {
       <NumberComponent>{currentComputerGuess}</NumberComponent>
       <Card style={styles.hintButtonsContainer}>
         <View style={styles.downUp}>
-          <DefaultButton 
-              color={Theme.colors.startButton}            
-              title="DOWN"
-              onPress={nextComputerGuessHandler.bind(this, "down")}   
-          />
+          <DefaultButton              
+              style={styles.down}
+              onPress={nextComputerGuessHandler.bind(this, "down")}>
+            <AntDesign
+              name="downcircle"
+              size={30}
+              color={Theme.colors.mainBackground}
+            />
+          </DefaultButton>
+                
         </View>
         <View style={styles.downUp} >
-          <DefaultButton 
-            color={Theme.colors.startButton}       
-            title="UP"
-            onPress={nextComputerGuessHandler.bind(this, "up")}
-          />
+          <DefaultButton
+            style={styles.up}
+            onPress={nextComputerGuessHandler.bind(this, "up")}>
+              <AntDesign
+              name="upcircle"
+              size={30}
+              color={Theme.colors.mainBackground}
+            />
+          </DefaultButton>    
         </View>
       </Card>
     </View>
@@ -95,15 +105,24 @@ const styles = StyleSheet.create({
   },
   hintButtonsContainer: {
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
     width: 200,
     maxWidth: "80%",
     marginTop: 20,
   },
-  downUp:{
-    width: '40%',
-    marginVertical: 10
+  down:{
+    backgroundColor: Theme.colors.darkerOrange,
+    borderRadius: 8,   
+    padding: 4,
+ 
+  },
+  up:{
+    backgroundColor: Theme.colors.startButton,
+    borderRadius: 8,
+    padding: 4,
+  
   }
+ 
 });
 
 export default GameScreen;

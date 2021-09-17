@@ -54,14 +54,8 @@ const StartGameScreen = props => {
                                     <NumberComponent>{numberConfirmed}</NumberComponent> 
                                 <View style={styles.startButton}>
                                     <DefaultButton
-                                        color={Theme.colors.startButton}
-                                        title="START GAME"
-                                        onPress={props.onStartGame.bind(this, numberConfirmed)} 
-                                     /> 
-                                    {/* <Button 
-                                        onPress={props.onStartGame.bind(this, numberConfirmed)} // {props.onStartGame(numberConfirmed)} He executed the function from HERE, instead of binding
-                                        title="START GAME"
-                                    /> */}
+                                        onPress={()=>{props.onStartGame(numberConfirmed)}}
+                                    >NEW GAME</DefaultButton>                                         
                                 </View>   
                             </View>
                         </Card>
@@ -89,20 +83,15 @@ const StartGameScreen = props => {
                 
                     <View style={styles.buttonsContainer}>
                         <View style={styles.button}>
-                            <DefaultButton
-                                title="Reset"
-                                color={Theme.colors.orange}
+                            <DefaultButton 
                                 onPress={resetInputHandler}
-                             />
-                          
+                                style={styles.resetButton}
+                                >RESET</DefaultButton>
                         </View>
                         <View style={styles.button}>
-                            <DefaultButton
-                                title="Confirm"
-                                color={Theme.colors.olivedrab}
-                                onPress={confirmInputHandler}  
-                            />
-                           
+                            <DefaultButton style={styles.confirmButton}
+                                onPress={confirmInputHandler}
+                                >CONFIRM</DefaultButton>         
                         </View>
                     </View>
                 </Card>     
@@ -124,18 +113,26 @@ const styles = StyleSheet.create({
         width: 300,
         maxWidth: '80%', // if device is too small width wont exceed 80%
     },
+    title:{
+        fontFamily: Theme.fonts.MontSerratSemiBold,
+        fontSize: 35,
+        color: Theme.colors.brightBlue
+    },
     text:{
         textAlign: 'center',
-        fontSize: 18,
+        fontSize: 16,
         marginTop: 10,
-        fontFamily: Theme.fonts.SansRegular,
+        fontFamily: Theme.fonts.MontSerratSemiBold,
     },
     textInput:{
         marginVertical: 10,
         width:50,
         height: 30,
         textAlign: 'center',
-        padding: 0
+        padding: 0,
+        color: Theme.colors.black,
+        fontFamily: Theme.fonts.MontSerratSemiBold,
+        borderWidth: 1
     },
     buttonsContainer:{
         flexDirection: 'row',
@@ -145,8 +142,8 @@ const styles = StyleSheet.create({
         padding: 15    
     },
     button:{
-        width: 100,
-            
+        width: 100,      
+       
     },
     confirmedBox:{
         marginTop:20,
@@ -158,9 +155,20 @@ const styles = StyleSheet.create({
     numberTitle:{
         fontSize: 20,
         marginVertical: 10
+    },  
+    resetButton:{
+        backgroundColor: Theme.colors.darkerOrange,
+        borderRadius: 8,
+    },
+    confirmButton:{     
+        backgroundColor: Theme.colors.startButton,
+        borderRadius: 8,
+              
     },
     startButton:{
-        marginVertical:10,
+        marginVertical:10, 
+        backgroundColor: Theme.colors.brightBlue, 
+        borderRadius: 8
     }
    
 })

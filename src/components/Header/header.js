@@ -23,8 +23,7 @@ const styles =  StyleSheet.create({
    title:{
       fontSize: 20,
        color: Theme.colors.orange,
-       fontFamily: Theme.fonts.MontSerratSemiBold
-      
+       fontFamily: Theme.fonts.MontSerratSemiBold,    
    }
 })
 

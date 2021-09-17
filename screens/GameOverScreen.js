@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Button,Text, Image } from 'react-native';
 import BodyText from '../src/components/BodyText/BodyText';
-import DefaultButton from '../src/components/DefaultButton/DefaultButton';
+import StartButton from '../src/components/StartButton/StartButton';
 import Theme from '../themes/themes';
 
 
@@ -9,7 +9,7 @@ import Theme from '../themes/themes';
 const GameOverScreen = props =>{ 
     return (
     <View style={styles.gameOverContainer}>       
-            <BodyText>The Game is Over</BodyText>
+            <BodyText>The Game is Over!</BodyText>
             <View style={styles.imageContainer}>
                 <Image 
                     source={require('../assets/success.png')}
@@ -18,15 +18,18 @@ const GameOverScreen = props =>{
                 />
             </View>
             <View style={styles.resultContainer}>
-                <Text style={styles.resultText}>Number of rounds: {props.numberOfRounds}</Text>
-                <Text style={styles.resultText}>Number was: {props.userNumber}</Text>
+                <Text style={styles.resultText}>
+                    Rounds taken: 
+                    <Text style={styles.numberResults}> {props.numberOfRounds}</Text>
+                </Text>
+                <Text style={styles.resultText}>
+                    Your Number was: 
+                    <Text style={styles.numberResults}> {props.userNumber}</Text>
+                </Text>
             </View>
             <View style={styles.reStartButton}>
-                <DefaultButton 
-                    title="NEW GAME"
-                    onPress={props.onRestartGame}
-                    color={Theme.colors.orange}
-                />    
+                <StartButton                       
+                    onPress={props.onRestartGame}>NEW GAME</StartButton>    
             </View>
     </View>
     )
@@ -41,22 +44,23 @@ const styles = StyleSheet.create({
         backgroundColor:Theme.colors.mainBackground     
     },
     resultContainer:{
-        flexDirection: 'row', 
-        justifyContent: 'space-around',
+        alignItems:'center',
+        justifyContent: 'center',
         width: '80%',
-        marginVertical: 20
+        marginVertical: 20,
     },
     resultText:{
-       color: Theme.colors.mainBlack,
+       color: Theme.colors.black,
        fontSize: 18,
-       fontFamily: Theme.fonts.SansBold,
+       fontFamily: Theme.fonts.MontSerratSemiBold,
+       paddingRight: 10
     },
     imageContainer:{    
         width: 300,
         height: 300,
         borderRadius: 150,
         borderWidth: 3,
-        borderColor: Theme.colors.mainBackground,
+        borderColor: Theme.colors.mainBlack,
         overflow: 'hidden',
         marginVertical: 30
     },
@@ -66,8 +70,13 @@ const styles = StyleSheet.create({
     },
     reStartButton:{
         width: '50%',
-       
-        
+        alignItems: 'center',
+        marginTop:10   
+    },
+    numberResults:{
+       color: Theme.colors.darkerOrange, 
+       paddingLeft: 10,
+       fontSize: 20, 
     }
 });
 

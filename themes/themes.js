@@ -1,10 +1,14 @@
 export default { 
     colors:{
-        mainBlack: '#000011',
+        mainBlack: '#222',
+        black: '#000011',
         mainBackground: '#f0f8ff',
         orange: '#ffa500',
         olivedrab: '#6b8e23',
-        startButton: '#4630EB'
+        startButton: '#4630EB',
+        darkerOrange: '#f86E00',
+        brightBlue: 'blue'
+
 
     },
 

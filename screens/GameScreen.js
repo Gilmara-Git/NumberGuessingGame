@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, ScrollView } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 
 import NumberComponent from "../src/components/NumberComponent/NumberComponent";
@@ -19,11 +19,12 @@ const generateRandomBetween = (min, max, exclude) => {
 };
 
 const GameScreen = props => {
-  const [currentComputerGuess, setCurrentComputerGuess] = useState(
-    generateRandomBetween(1, 100, props.userNumber)
-  );
-  const [roundCount, setRoundCount] = useState(0);
+  const initialGuess = generateRandomBetween(1, 100, props.userNumber);
 
+  const [currentComputerGuess, setCurrentComputerGuess] = useState(initialGuess);
+  const [ pastGuess, setPastGuess ] = useState([initialGuess]);
+  console.log(pastGuess, 'pastGuess')
+  
   const currentMin = useRef(1);
   const currentMax = useRef(100);
   
@@ -31,7 +32,7 @@ const GameScreen = props => {
 
   useEffect(() => {
     if (currentComputerGuess === userNumber) {
-      onGameOver(roundCount);
+      onGameOver(pastGuess.length);
     }
   }, [currentComputerGuess, userNumber, onGameOver]);
 
@@ -40,7 +41,7 @@ const GameScreen = props => {
       (direction === "down" && currentComputerGuess < userNumber) ||
       (direction === "up" && currentComputerGuess > userNumber)
     ) {
-      Alert.alert("Don't Cheat", "Provide the correct Clue", [
+      Alert.alert("Don't Cheat", "Provide the correct CLUE", [
         { text: "Back", style: "cancel" },
       ]);
       return;
@@ -49,7 +50,7 @@ const GameScreen = props => {
     if (direction === "down") {
       currentMax.current = currentComputerGuess;
     } else {
-      currentMin.current = currentComputerGuess;
+      currentMin.current = currentComputerGuess + 1;
     }
     const nextGuess = generateRandomBetween(
       currentMin.current,
@@ -57,7 +58,7 @@ const GameScreen = props => {
       currentComputerGuess
     );
     setCurrentComputerGuess(nextGuess);
-    setRoundCount((currentRounds) => currentRounds + 1);
+    setPastGuess(currentPastGuess =>[ nextGuess, ...currentPastGuess ]);
   };
 
   return (
@@ -89,6 +90,16 @@ const GameScreen = props => {
           </DefaultButton>    
         </View>
       </Card>
+      
+      <ScrollView>
+         {pastGuess.map(guess=>
+            <View key={guess}>
+              <Text>{guess}</Text>
+            </View>
+          )}
+      </ScrollView>
+
+      
     </View>
   );
 };
@@ -120,7 +131,10 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.startButton,
     borderRadius: 8,
     padding: 4,
-  
+  },
+  scrollViewContainer:{
+
+    backgroundColor: 'red'
   }
  
 });

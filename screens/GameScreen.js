@@ -18,12 +18,22 @@ const generateRandomBetween = (min, max, exclude) => {
   return randomNumber;
 };
 
+const renderListItem = (value, numberOfRounds) =>{
+  console.log(value, 'this is my guess')
+  return (<View 
+            style={styles.listItem}
+            key={value}>
+            <Text style={styles.listText}>#{numberOfRounds}</Text>
+            <Text style={styles.listText}>{value}</Text>
+          </View> ) 
+}
+
 const GameScreen = props => {
   const initialGuess = generateRandomBetween(1, 100, props.userNumber);
 
   const [currentComputerGuess, setCurrentComputerGuess] = useState(initialGuess);
   const [ pastGuess, setPastGuess ] = useState([initialGuess]);
-  console.log(pastGuess, 'pastGuess')
+  console.log(pastGuess.length, 'pastGuess')
   
   const currentMin = useRef(1);
   const currentMax = useRef(100);
@@ -58,7 +68,7 @@ const GameScreen = props => {
       currentComputerGuess
     );
     setCurrentComputerGuess(nextGuess);
-    setPastGuess(currentPastGuess =>[ nextGuess, ...currentPastGuess ]);
+    setPastGuess(currentPastGuess =>[ nextGuess,...currentPastGuess ]);
   };
 
   return (
@@ -91,15 +101,13 @@ const GameScreen = props => {
         </View>
       </Card>
       
-      <ScrollView>
-         {pastGuess.map(guess=>
-            <View key={guess}>
-              <Text>{guess}</Text>
-            </View>
-          )}
-      </ScrollView>
-
-      
+      <View style={styles.listContainer}>
+        <ScrollView 
+          showVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollViewContainer}>
+          {pastGuess.map((guess, index) => renderListItem(guess, pastGuess.length - index ))}
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -131,10 +139,31 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.startButton,
     borderRadius: 8,
     padding: 4,
+  }, 
+  listContainer:{
+    width: '80%',
+    flex: 1,
+   
   },
   scrollViewContainer:{
-
-    backgroundColor: 'red'
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'flex-end'
+  },
+  listItem:{
+    flexDirection: 'row',
+    marginVertical: 10,
+    borderColor: Theme.colors.mainBlack,
+    borderWidth: 1,   
+    justifyContent: 'space-between',
+    padding: 10,
+    backgroundColor: Theme.colors.mainBackground,  
+    borderRadius: 8, 
+    width: '60%' 
+  },
+  listText:{
+    color: Theme.colors.mainBlack,
+    fontFamily: Theme.fonts.MontSerratSemiBold
   }
  
 });

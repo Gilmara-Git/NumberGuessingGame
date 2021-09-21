@@ -7,9 +7,11 @@ export default {
         olivedrab: '#6b8e23',
         startButton: '#4630EB',
         darkerOrange: '#f86E00',
-        brightBlue: 'blue'
-
-
+        brightBlue: 'blue',
+        navyBlue: '#1A2856',
+        orangeSyneos: '#EB3301',
+        gray: '#1A2856',
+        ligtherGray: '#EAF3F8'
     },
 
     fonts:{

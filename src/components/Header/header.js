@@ -15,13 +15,13 @@ const styles =  StyleSheet.create({
        paddingTop: 36,
        height: 100,
        width: '100%',
-       backgroundColor: Theme.colors.mainBlack,
+       backgroundColor: Theme.colors.orangeSyneos,
        justifyContent: 'center',
        alignItems: 'center'
    },
    title:{
       fontSize: 25,
-       color: Theme.colors.orange,
+       color: Theme.colors.ligtherGray,
        fontFamily: Theme.fonts.MontSerratSemiBold,    
    }
 })

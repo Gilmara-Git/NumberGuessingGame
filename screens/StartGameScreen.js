@@ -116,11 +116,12 @@ const styles = StyleSheet.create({
     title:{
         fontFamily: Theme.fonts.MontSerratSemiBold,
         fontSize: 35,
-        color: Theme.colors.brightBlue
+        color: Theme.colors.navyBlue
     },
     text:{
         textAlign: 'center',
-        fontSize: 16,
+        color: Theme.colors.navyBlue,
+        fontSize: 17,
         marginTop: 10,
         fontFamily: Theme.fonts.MontSerratSemiBold,
     },
@@ -157,11 +158,11 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },  
     resetButton:{
-        backgroundColor: Theme.colors.darkerOrange,
+        backgroundColor: Theme.colors.orangeSyneos,
         borderRadius: 8,
     },
     confirmButton:{     
-        backgroundColor: Theme.colors.startButton,
+        backgroundColor: Theme.colors.navyBlue,
         borderRadius: 8,
               
     },

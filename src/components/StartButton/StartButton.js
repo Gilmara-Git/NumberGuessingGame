@@ -18,7 +18,7 @@ const StartButton = props =>{
 
 const styles =  StyleSheet.create({
     buttonContainer:{
-    backgroundColor: Theme.colors.darkerOrange,
+    backgroundColor: Theme.colors.orangeSyneos,
     padding:10,
     alignItems: 'center',   
     borderRadius: 8,
@@ -26,7 +26,7 @@ const styles =  StyleSheet.create({
 },
     buttonText:{
         fontSize: 21,
-        color: Theme.colors.mainBackground,
+        color: Theme.colors.ligtherGray,
         fontFamily: Theme.fonts.MontSerratSemiBold,
         letterSpacing:1
     }

@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         marginTop:10   
     },
     numberResults:{
-       color: Theme.colors.darkerOrange, 
+       color: Theme.colors.orangeSyneos, 
        paddingLeft: 10,
        fontSize: 20, 
     }

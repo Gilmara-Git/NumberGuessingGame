@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, Text, StyleSheet, Alert, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Alert, ScrollView, FlatList } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 
 import NumberComponent from "../src/components/NumberComponent/NumberComponent";
@@ -18,13 +18,12 @@ const generateRandomBetween = (min, max, exclude) => {
   return randomNumber;
 };
 
-const renderListItem = (value, numberOfRounds) =>{
-  console.log(value, 'this is my guess')
+const renderListItem = ( pastGuessLength, itemData ) =>{ 
+
   return (<View 
-            style={styles.listItem}
-            key={value}>
-            <Text style={styles.listText}>#{numberOfRounds}</Text>
-            <Text style={styles.listText}>{value}</Text>
+            style={styles.listItem}>
+              <Text style={styles.listText}>#{pastGuessLength - itemData.index}</Text>
+              <Text style={styles.listText}>{itemData.item}</Text>
           </View> ) 
 }
 
@@ -32,9 +31,9 @@ const GameScreen = props => {
   const initialGuess = generateRandomBetween(1, 100, props.userNumber);
 
   const [currentComputerGuess, setCurrentComputerGuess] = useState(initialGuess);
-  const [ pastGuess, setPastGuess ] = useState([initialGuess]);
-  console.log(pastGuess.length, 'pastGuess')
-  
+  const [ pastGuess, setPastGuess ] = useState([initialGuess.toString()]);
+  console.log(pastGuess, 'sou o past Guess in String')
+
   const currentMin = useRef(1);
   const currentMax = useRef(100);
   
@@ -68,7 +67,7 @@ const GameScreen = props => {
       currentComputerGuess
     );
     setCurrentComputerGuess(nextGuess);
-    setPastGuess(currentPastGuess =>[ nextGuess,...currentPastGuess ]);
+    setPastGuess(currentPastGuess =>[ nextGuess.toString(),...currentPastGuess ]);
   };
 
   return (
@@ -102,11 +101,16 @@ const GameScreen = props => {
       </Card>
       
       <View style={styles.listContainer}>
-        <ScrollView 
+        {/* <ScrollView 
           showVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollViewContainer}>
           {pastGuess.map((guess, index) => renderListItem(guess, pastGuess.length - index ))}
-        </ScrollView>
+        </ScrollView> */}
+        <FlatList
+          contentContainerStyle={styles.scrollViewContainer}
+          data={pastGuess}
+          renderItem={renderListItem.bind(this, pastGuess.length)}
+          keyExtractor={ item => item }/>
       </View>
     </View>
   );
@@ -130,24 +134,24 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   down:{
-    backgroundColor: Theme.colors.darkerOrange,
+    backgroundColor: Theme.colors.orangeSyneos,
     borderRadius: 8,   
     padding: 4,
  
   },
   up:{
-    backgroundColor: Theme.colors.startButton,
+    backgroundColor: Theme.colors.navyBlue,
     borderRadius: 8,
     padding: 4,
   }, 
   listContainer:{
-    width: '80%',
+    width: '60%',
     flex: 1,
    
   },
   scrollViewContainer:{
-    alignItems: 'center',
-    flex: 1,
+    // alignItems: 'center',
+    flexGrow: 1,
     justifyContent: 'flex-end'
   },
   listItem:{
@@ -159,7 +163,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: Theme.colors.mainBackground,  
     borderRadius: 8, 
-    width: '60%' 
+    width: '100%' 
   },
   listText:{
     color: Theme.colors.mainBlack,

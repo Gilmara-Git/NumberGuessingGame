@@ -10,9 +10,8 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: Theme.fonts.MontSerratSemiBold,
     fontSize: 35,
-    color: Theme.colors.navyBlue 
+    color: Theme.colors.navyBlue,
   },
 });
 
 export default BodyText;
-

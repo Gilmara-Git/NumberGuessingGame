@@ -1,11 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, Text, StyleSheet, Alert, ScrollView, FlatList } from "react-native";
-import { AntDesign } from '@expo/vector-icons';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+  ScrollView,
+  FlatList,
+} from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
 import NumberComponent from "../src/components/NumberComponent/NumberComponent";
-import DefaultButton from '../src/components/DefaultButton/DefaultButton'
+import DefaultButton from "../src/components/DefaultButton/DefaultButton";
 import Card from "../src/components/Card/Card";
-import Theme from '../themes/themes'
+import Theme from "../themes/themes";
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -18,25 +25,25 @@ const generateRandomBetween = (min, max, exclude) => {
   return randomNumber;
 };
 
-const renderListItem = ( pastGuessLength, itemData ) =>{ 
+const renderListItem = (pastGuessLength, itemData) => {
+  return (
+    <View style={styles.listItem}>
+      <Text style={styles.listText}>#{pastGuessLength - itemData.index}</Text>
+      <Text style={styles.listText}>{itemData.item}</Text>
+    </View>
+  );
+};
 
-  return (<View 
-            style={styles.listItem}>
-              <Text style={styles.listText}>#{pastGuessLength - itemData.index}</Text>
-              <Text style={styles.listText}>{itemData.item}</Text>
-          </View> ) 
-}
-
-const GameScreen = props => {
+const GameScreen = (props) => {
   const initialGuess = generateRandomBetween(1, 100, props.userNumber);
 
-  const [currentComputerGuess, setCurrentComputerGuess] = useState(initialGuess);
-  const [ pastGuess, setPastGuess ] = useState([initialGuess.toString()]);
-  console.log(pastGuess, 'sou o past Guess in String')
+  const [currentComputerGuess, setCurrentComputerGuess] =
+    useState(initialGuess);
+  const [pastGuess, setPastGuess] = useState([initialGuess.toString()]);
 
   const currentMin = useRef(1);
   const currentMax = useRef(100);
-  
+
   const { userNumber, onGameOver } = props;
 
   useEffect(() => {
@@ -67,7 +74,10 @@ const GameScreen = props => {
       currentComputerGuess
     );
     setCurrentComputerGuess(nextGuess);
-    setPastGuess(currentPastGuess =>[ nextGuess.toString(),...currentPastGuess ]);
+    setPastGuess((currentPastGuess) => [
+      nextGuess.toString(),
+      ...currentPastGuess,
+    ]);
   };
 
   return (
@@ -76,30 +86,31 @@ const GameScreen = props => {
       <NumberComponent>{currentComputerGuess}</NumberComponent>
       <Card style={styles.hintButtonsContainer}>
         <View style={styles.downUp}>
-          <DefaultButton              
-              style={styles.down}
-              onPress={nextComputerGuessHandler.bind(this, "down")}>
+          <DefaultButton
+            style={styles.down}
+            onPress={nextComputerGuessHandler.bind(this, "down")}
+          >
             <AntDesign
               name="downcircle"
               size={30}
               color={Theme.colors.mainBackground}
             />
           </DefaultButton>
-                
         </View>
-        <View style={styles.downUp} >
+        <View style={styles.downUp}>
           <DefaultButton
             style={styles.up}
-            onPress={nextComputerGuessHandler.bind(this, "up")}>
-              <AntDesign
+            onPress={nextComputerGuessHandler.bind(this, "up")}
+          >
+            <AntDesign
               name="upcircle"
               size={30}
               color={Theme.colors.mainBackground}
             />
-          </DefaultButton>    
+          </DefaultButton>
         </View>
       </Card>
-      
+
       <View style={styles.listContainer}>
         {/* <ScrollView 
           showVerticalScrollIndicator={false}
@@ -110,7 +121,8 @@ const GameScreen = props => {
           contentContainerStyle={styles.scrollViewContainer}
           data={pastGuess}
           renderItem={renderListItem.bind(this, pastGuess.length)}
-          keyExtractor={ item => item }/>
+          keyExtractor={(item) => item}
+        />
       </View>
     </View>
   );
@@ -133,43 +145,40 @@ const styles = StyleSheet.create({
     maxWidth: "80%",
     marginTop: 20,
   },
-  down:{
+  down: {
     backgroundColor: Theme.colors.orangeSyneos,
-    borderRadius: 8,   
+    borderRadius: 8,
     padding: 4,
- 
   },
-  up:{
+  up: {
     backgroundColor: Theme.colors.navyBlue,
     borderRadius: 8,
     padding: 4,
-  }, 
-  listContainer:{
-    width: '60%',
-    flex: 1,
-   
   },
-  scrollViewContainer:{
+  listContainer: {
+    width: "60%",
+    flex: 1,
+  },
+  scrollViewContainer: {
     // alignItems: 'center',
     flexGrow: 1,
-    justifyContent: 'flex-end'
+    justifyContent: "flex-end",
   },
-  listItem:{
-    flexDirection: 'row',
+  listItem: {
+    flexDirection: "row",
     marginVertical: 10,
     borderColor: Theme.colors.mainBlack,
-    borderWidth: 1,   
-    justifyContent: 'space-between',
+    borderWidth: 1,
+    justifyContent: "space-between",
     padding: 10,
-    backgroundColor: Theme.colors.mainBackground,  
-    borderRadius: 8, 
-    width: '100%' 
+    backgroundColor: Theme.colors.mainBackground,
+    borderRadius: 8,
+    width: "100%",
   },
-  listText:{
+  listText: {
     color: Theme.colors.mainBlack,
-    fontFamily: Theme.fonts.MontSerratSemiBold
-  }
- 
+    fontFamily: Theme.fonts.MontSerratSemiBold,
+  },
 });
 
 export default GameScreen;

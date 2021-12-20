@@ -85,7 +85,7 @@ const GameScreen = (props) => {
       <Text style={styles.oppGuess}>Opponent's Guess</Text>
       <NumberComponent>{currentComputerGuess}</NumberComponent>
       <Card style={styles.hintButtonsContainer}>
-        <View style={styles.downUp}>
+        <View>
           <DefaultButton
             style={styles.down}
             onPress={nextComputerGuessHandler.bind(this, "down")}
@@ -97,7 +97,7 @@ const GameScreen = (props) => {
             />
           </DefaultButton>
         </View>
-        <View style={styles.downUp}>
+        <View>
           <DefaultButton
             style={styles.up}
             onPress={nextComputerGuessHandler.bind(this, "up")}

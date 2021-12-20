@@ -6,7 +6,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
-  Dimensions
+  Dimensions,
+  ScrollView
 } from "react-native";
 
 import Theme from "../themes/themes";
@@ -77,50 +78,54 @@ const StartGameScreen = (props) => {
   }
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-      }}
-    >
-      <View style={styles.startScreen}>  
-        <Text style={styles.title}>Start New Game!</Text>
-     
-        <Card style={styles.inputContainer}>
-          <Text style={styles.text}>Enter a Number</Text>
+    <ScrollView
+      showVerticalScrollIndicator={false}
+    >   
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <View style={styles.startScreen}>  
+          <Text style={styles.title}>Start New Game!</Text>
+      
+          <Card style={styles.inputContainer}>
+            <Text style={styles.text}>Enter a Number</Text>
 
-          <Input
-            value={numberEntered}
-            keyboardType="number-pad"
-            blurOnSubmit
-            auto-correct={false}
-            autoCapitalize="none"
-            maxLength={2}
-            onChangeText={numberInputHandler}
-            style={styles.textInput}
-          />
+            <Input
+              value={numberEntered}
+              keyboardType="number-pad"
+              blurOnSubmit
+              auto-correct={false}
+              autoCapitalize="none"
+              maxLength={2}
+              onChangeText={numberInputHandler}
+              style={styles.textInput}
+            />
 
-          <View style={styles.buttonsContainer}>
-            <View style={styles.button}>
-              <DefaultButton
-                onPress={resetInputHandler}
-                style={styles.resetButton}
-              >
-                RESET
-              </DefaultButton>
+            <View style={styles.buttonsContainer}>
+              <View style={styles.button}>
+                <DefaultButton
+                  onPress={resetInputHandler}
+                  style={styles.resetButton}
+                >
+                  RESET
+                </DefaultButton>
+              </View>
+              <View style={styles.button}>
+                <DefaultButton
+                  style={styles.confirmButton}
+                  onPress={confirmInputHandler}
+                >
+                  CONFIRM
+                </DefaultButton>
+              </View>
             </View>
-            <View style={styles.button}>
-              <DefaultButton
-                style={styles.confirmButton}
-                onPress={confirmInputHandler}
-              >
-                CONFIRM
-              </DefaultButton>
-            </View>
-          </View>
-        </Card>
-        {ConfirmedOutput}
-      </View>
-    </TouchableWithoutFeedback>
+          </Card>
+          {ConfirmedOutput}
+        </View>
+      </TouchableWithoutFeedback>
+    </ScrollView>
   );
 };
 
@@ -172,7 +177,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width / 3,
   },
   confirmedBox: {
-    marginTop: 20,
+    marginTop: Dimensions.get('window').height < 550 ? 10: 20,
   },
   numberInfoContainer: {
     alignItems: "center",

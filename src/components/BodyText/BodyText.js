@@ -1,5 +1,9 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { 
+  Text, 
+  StyleSheet,
+  Dimensions
+} from "react-native";
 import Theme from "../../../themes/themes";
 
 const BodyText = (props) => {
@@ -9,7 +13,7 @@ const BodyText = (props) => {
 const styles = StyleSheet.create({
   text: {
     fontFamily: Theme.fonts.MontSerratSemiBold,
-    fontSize: 35,
+    fontSize: Dimensions.get('window').height < 550 ? 20 : 35,
     color: Theme.colors.navyBlue,
   },
 });

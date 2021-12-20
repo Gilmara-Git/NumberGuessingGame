@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "80%",
-    marginVertical: 20,
+    marginVertical: Dimensions.get('window').height < 550 ? 3 :20,
   },
   resultText: {
     color: Theme.colors.black,
-    fontSize: 18,
+    fontSize: Dimensions.get('window').height < 550 ? 13: 18,
     fontFamily: Theme.fonts.MontSerratSemiBold,
     paddingRight: 10,
   },
@@ -67,21 +67,21 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: Theme.colors.mainBlack,
     overflow: "hidden",
-    marginVertical: 30,
+    marginVertical: Dimensions.get('window').height < 550 ? 10: 30,
   },
   image: {
     width: "100%",
     height: "100%",
   },
   reStartButton: {
-    width: "50%",
+    width: Dimensions.get('window').width * 0.7,
     alignItems: "center",
     marginTop: 10,
   },
   numberResults: {
     color: Theme.colors.orangeSyneos,
     paddingLeft: 10,
-    fontSize: 20,
+    fontSize: Dimensions.get('window').height < 550 ? 15: 20,
   },
 });
 

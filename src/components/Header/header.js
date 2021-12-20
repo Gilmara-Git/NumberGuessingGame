@@ -12,7 +12,7 @@ const Header = (props) => {
 
 const styles = StyleSheet.create({
   header: {
-    paddingTop: 36,
+    paddingTop: 20,
     height: 100,
     width: "100%",
     backgroundColor: Theme.colors.orangeSyneos,
@@ -20,9 +20,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 25,
+    fontSize: 20,
     color: Theme.colors.ligtherGray,
-    fontFamily: Theme.fonts.MontSerratSemiBold,
+    fontFamily: Theme.fonts.MontSerratSemiBold,  
+    
   },
 });
 

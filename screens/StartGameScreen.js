@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Dimensions
 } from "react-native";
 
 import Theme from "../themes/themes";
@@ -20,6 +21,9 @@ const StartGameScreen = (props) => {
   const [numberEntered, setNumberEntered] = useState();
   const [userConfirmed, setUSerConfirmed] = useState(false);
   const [numberConfirmed, setNumberConfirmed] = useState();
+
+  console.log('Dim height', Dimensions.get('window').height)
+  console.log('Dim width', Dimensions.get('window').width)
 
   const numberInputHandler = (numberInput) => {
     setNumberEntered(numberInput.replace(/[^0-9]/g, ""));
@@ -165,7 +169,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   button: {
-    width: 100,
+    width: Dimensions.get('window').width / 3,
   },
   confirmedBox: {
     marginTop: 20,

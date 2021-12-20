@@ -1,11 +1,19 @@
 import React from "react";
-import { View, StyleSheet, Text, Image } from "react-native";
+import { 
+  View, 
+  StyleSheet, 
+  Text, 
+  Image,
+  ScrollView,
+  Dimensions
+} from "react-native";
 import BodyText from "../src/components/BodyText/BodyText";
 import StartButton from "../src/components/StartButton/StartButton";
 import Theme from "../themes/themes";
 
 const GameOverScreen = (props) => {
   return (
+ 
     <View style={styles.gameOverContainer}>
       <BodyText>The Game is Over!</BodyText>
       <View style={styles.imageContainer}>
@@ -29,6 +37,7 @@ const GameOverScreen = (props) => {
         <StartButton onPress={props.onRestartGame}>NEW GAME</StartButton>
       </View>
     </View>
+ 
   );
 };
 
@@ -52,9 +61,9 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   imageContainer: {
-    width: 300,
-    height: 300,
-    borderRadius: 150,
+    width: Dimensions.get('window').width * 0.7,
+    height: Dimensions.get('window').width * 0.7,
+    borderRadius: Dimensions.get('window').width * 0.7 / 2,
     borderWidth: 3,
     borderColor: Theme.colors.mainBlack,
     overflow: "hidden",

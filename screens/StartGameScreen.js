@@ -78,8 +78,9 @@ const StartGameScreen = (props) => {
         Keyboard.dismiss();
       }}
     >
-      <View style={styles.startScreen}>
+      <View style={styles.startScreen}>  
         <Text style={styles.title}>Start New Game!</Text>
+     
         <Card style={styles.inputContainer}>
           <Text style={styles.text}>Enter a Number</Text>
 
@@ -135,8 +136,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: Theme.fonts.MontSerratSemiBold,
-    fontSize: 35,
+    fontSize: 25,
     color: Theme.colors.navyBlue,
+    textAlign: 'center'
   },
   text: {
     textAlign: "center",

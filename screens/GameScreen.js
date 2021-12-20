@@ -4,8 +4,8 @@ import {
   Text,
   StyleSheet,
   Alert,
-  ScrollView,
   FlatList,
+  Dimensions
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -80,6 +80,13 @@ const GameScreen = (props) => {
     ]);
   };
 
+// Dimensions can also be used on if checks. 
+// If height is bigger than 600, we could return a different JSX
+// if(Dimensions.get('window').height > 600 ){
+// return  <View>..........</View>
+// }
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.oppGuess}>Opponent's Guess</Text>
@@ -143,7 +150,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: 200,
     maxWidth: "80%",
-    marginTop: 20,
+    marginTop: Dimensions.get('window').height > 600 ? 20 : 10,
   },
   down: {
     backgroundColor: Theme.colors.orangeSyneos,
@@ -156,7 +163,7 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   listContainer: {
-    width: "60%",
+    width: Dimensions.get('window').width > 350 ? "60%" : '80%',
     flex: 1,
   },
   scrollViewContainer: {

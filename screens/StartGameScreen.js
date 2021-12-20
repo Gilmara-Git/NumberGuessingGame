@@ -128,8 +128,10 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginTop: 15,
     alignItems: "center",
-    width: 300,
-    maxWidth: "80%", // if device is too small width wont exceed 80%
+    // width: 300,
+    // maxWidth: "80%"
+    width: '80%',
+    minWidth: 300
   },
   title: {
     fontFamily: Theme.fonts.MontSerratSemiBold,

@@ -7,7 +7,8 @@ import {
   Keyboard,
   Alert,
   Dimensions,
-  ScrollView
+  ScrollView,
+  KeyboardAvoidingView
 } from "react-native";
 
 import Theme from "../themes/themes";
@@ -81,6 +82,7 @@ const StartGameScreen = (props) => {
     <ScrollView
       showVerticalScrollIndicator={false}
     >   
+     <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={30}> 
       <TouchableWithoutFeedback
         onPress={() => {
           Keyboard.dismiss();
@@ -125,6 +127,7 @@ const StartGameScreen = (props) => {
           {ConfirmedOutput}
         </View>
       </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </ScrollView>
   );
 };

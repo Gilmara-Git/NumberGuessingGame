@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -23,6 +23,25 @@ const StartGameScreen = (props) => {
   const [numberEntered, setNumberEntered] = useState();
   const [userConfirmed, setUSerConfirmed] = useState(false);
   const [numberConfirmed, setNumberConfirmed] = useState();
+  const [buttonWidth, setButtonWidth ] = useState(Dimensions.get('window').width / 4); 
+  console.log(buttonWidth, 'buttonwidth')
+
+ 
+
+  useEffect(()=>{
+    const updateButtonLayout = () =>{
+      console.log('Sou a updateButtonLayout')
+      setButtonWidth(Dimensions.get('window').width /4);
+    }
+    
+    Dimensions.addEventListener("change", updateButtonLayout);
+   // Below this is our clean up function. We detect the event, then we clear so, when it changes again we capture it
+   // This way we have only one EventListener
+    return () =>{
+      Dimensions.removeEventListener("change", updateButtonLayout);
+    };
+
+  });
 
   console.log('Dim height', Dimensions.get('window').height)
   console.log('Dim width', Dimensions.get('window').width)
@@ -106,7 +125,7 @@ const StartGameScreen = (props) => {
             />
 
             <View style={styles.buttonsContainer}>
-              <View style={styles.button}>
+              <View style={{width: buttonWidth }}>
                 <DefaultButton
                   onPress={resetInputHandler}
                   style={styles.resetButton}
@@ -114,7 +133,7 @@ const StartGameScreen = (props) => {
                   RESET
                 </DefaultButton>
               </View>
-              <View style={styles.button}>
+              <View style={{ width: buttonWidth }}>
                 <DefaultButton
                   style={styles.confirmButton}
                   onPress={confirmInputHandler}
@@ -176,9 +195,9 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 15,
   },
-  button: {
-    width: Dimensions.get('window').width / 3,
-  },
+  // button: {
+  //   width: Dimensions.get('window').width / 3,
+  // },
   confirmedBox: {
     marginTop: Dimensions.get('window').height < 550 ? 10: 20,
   },

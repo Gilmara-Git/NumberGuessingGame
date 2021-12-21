@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Alert,
   FlatList,
-  Dimensions
+  Dimensions,
+  ScrollView
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -88,6 +89,7 @@ const GameScreen = (props) => {
 
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Text style={styles.oppGuess}>Opponent's Guess</Text>
       <NumberComponent>{currentComputerGuess}</NumberComponent>
@@ -132,6 +134,7 @@ const GameScreen = (props) => {
         />
       </View>
     </View>
+    </ScrollView>
   );
 };
 

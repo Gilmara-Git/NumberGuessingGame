@@ -42,7 +42,7 @@ const GameScreen = (props) => {
     useState(initialGuess);
   const [pastGuess, setPastGuess] = useState([initialGuess.toString()]);
   const [ windowHeight, setWindowHeight ] = useState(Dimensions.get('window').height);
-console.log(windowHeight, 'height na gameScreen')
+
   const currentMin = useRef(1);
   const currentMax = useRef(100);
 

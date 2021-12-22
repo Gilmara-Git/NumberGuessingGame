@@ -42,7 +42,7 @@ const GameScreen = (props) => {
     useState(initialGuess);
   const [pastGuess, setPastGuess] = useState([initialGuess.toString()]);
   const [ windowHeight, setWindowHeight ] = useState(Dimensions.get('window').height);
-
+console.log(windowHeight, 'height na gameScreen')
   const currentMin = useRef(1);
   const currentMax = useRef(100);
 
@@ -150,7 +150,7 @@ if(windowHeight < 500 ){
     <View style={styles.container}>
       <Text style={styles.oppGuess}>Opponent's Guess</Text>
       <NumberComponent>{currentComputerGuess}</NumberComponent>
-      <Card style={styles.hintButtonsContainer}>
+      <Card style={{...styles.hintButtonsContainer, marginTop: windowHeight > 600 ? 20 : 10}}>
         <View>
           <DefaultButton
             style={styles.down}
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: 200,
     maxWidth: "80%",
-    marginTop: Dimensions.get('window').height > 600 ? 20 : 10,
+    // marginTop: Dimensions.get('window').height > 600 ? 20 : 10,
   },
   down: {
     backgroundColor: Theme.colors.orangeSyneos,

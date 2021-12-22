@@ -93,63 +93,9 @@ useEffect(()=>{
 });
 
 
-// Dimensions can also be used on if checks. 
-// If height is bigger than 600, we could return a different JSX
-// if(Dimensions.get('window').height > 600 ){
-// return  <View>..........</View>
-// }
-if(windowHeight < 500 ){
-  return (
-   <View style={styles.container}>
-      <Text style={styles.oppGuess}>Opponent's Guess</Text>
-        <View style={styles.controls}>          
-            <DefaultButton
-              style={styles.down}
-              onPress={nextComputerGuessHandler.bind(this, "down")}
-              >
-              <AntDesign
-                name="downcircle"
-                size={30}
-                color={Theme.colors.mainBackground}
-                />
-            </DefaultButton>
-      
-            <NumberComponent>{currentComputerGuess}</NumberComponent>
-      
-            <DefaultButton
-              style={styles.up}
-              onPress={nextComputerGuessHandler.bind(this, "up")}
-            >
-              <AntDesign
-                name="upcircle"
-                size={30}
-                color={Theme.colors.mainBackground}
-              />
-            </DefaultButton>
-        </View> 
-
-      <View style={styles.listContainer}>
-        {/* <ScrollView 
-          showVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollViewContainer}>
-          {pastGuess.map((guess, index) => renderListItem(guess, pastGuess.length - index ))}
-        </ScrollView> */}
-        <FlatList
-          contentContainerStyle={styles.scrollViewContainer}
-          data={pastGuess}
-          renderItem={renderListItem.bind(this, pastGuess.length)}
-          keyExtractor={(item) => item}
-        />
-      </View>
-    </View>
-    )
-}
-
-  return (
-  
-    <View style={styles.container}>
-      <Text style={styles.oppGuess}>Opponent's Guess</Text>
-      <NumberComponent>{currentComputerGuess}</NumberComponent>
+let gameControls = (
+  <React.Fragment>
+    <NumberComponent>{currentComputerGuess}</NumberComponent>
       <Card style={{...styles.hintButtonsContainer, marginTop: windowHeight > 600 ? 20 : 10}}>
         <View>
           <DefaultButton
@@ -176,7 +122,45 @@ if(windowHeight < 500 ){
           </DefaultButton>
         </View>
       </Card>
+  </React.Fragment>
+);
 
+
+if(windowHeight < 500 ){
+  gameControls =  (      
+        <View style={styles.controls}>          
+            <DefaultButton
+              style={styles.down}
+              onPress={nextComputerGuessHandler.bind(this, "down")}
+              >
+              <AntDesign
+                name="downcircle"
+                size={30}
+                color={Theme.colors.mainBackground}
+                />
+            </DefaultButton>
+      
+            <NumberComponent>{currentComputerGuess}</NumberComponent>
+      
+            <DefaultButton
+              style={styles.up}
+              onPress={nextComputerGuessHandler.bind(this, "up")}
+            >
+              <AntDesign
+                name="upcircle"
+                size={30}
+                color={Theme.colors.mainBackground}
+              />
+            </DefaultButton>
+        </View> 
+        )  
+}
+
+  return (
+  
+    <View style={styles.container}>
+      <Text style={styles.oppGuess}>Opponent's Guess</Text>
+        {gameControls}
       <View style={styles.listContainer}>
         {/* <ScrollView 
           showVerticalScrollIndicator={false}

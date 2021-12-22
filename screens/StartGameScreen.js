@@ -24,14 +24,13 @@ const StartGameScreen = (props) => {
   const [userConfirmed, setUSerConfirmed] = useState(false);
   const [numberConfirmed, setNumberConfirmed] = useState();
   const [buttonWidth, setButtonWidth ] = useState(Dimensions.get('window').width / 4); 
-  console.log(buttonWidth, 'buttonwidth')
-
- 
-
+  const [windowHeight, setWindowHeight ] = useState(Dimensions.get('window').height); 
+  console.log(windowHeight, 'heightttt')
+  
   useEffect(()=>{
-    const updateButtonLayout = () =>{
-      console.log('Sou a updateButtonLayout')
+    const updateButtonLayout = () =>{     
       setButtonWidth(Dimensions.get('window').width /4);
+      setWindowHeight(Dimensions.get('window').height)
     }
     
     Dimensions.addEventListener("change", updateButtonLayout);
@@ -43,8 +42,8 @@ const StartGameScreen = (props) => {
 
   });
 
-  console.log('Dim height', Dimensions.get('window').height)
-  console.log('Dim width', Dimensions.get('window').width)
+  // console.log('Dim height', Dimensions.get('window').height)
+  // console.log('Dim width', Dimensions.get('window').width)
 
   const numberInputHandler = (numberInput) => {
     setNumberEntered(numberInput.replace(/[^0-9]/g, ""));
@@ -79,7 +78,7 @@ const StartGameScreen = (props) => {
   let ConfirmedOutput;
   if (userConfirmed) {
     ConfirmedOutput = (
-      <Card style={styles.confirmedBox}>
+      <Card style={{marginTop: windowHeight <= 320 ? 15: 20}}>
         <View style={styles.numberInfoContainer}>
           <Text style={GlobalStyles.title}>Your Number</Text>
           <NumberComponent>{numberConfirmed}</NumberComponent>
@@ -198,9 +197,9 @@ const styles = StyleSheet.create({
   // button: {
   //   width: Dimensions.get('window').width / 3,
   // },
-  confirmedBox: {
-    marginTop: Dimensions.get('window').height < 550 ? 10: 20,
-  },
+  // confirmedBox: {
+  //   marginTop: Dimensions.get('window').height <= 320 ? 15: 20,
+  // },
   numberInfoContainer: {
     alignItems: "center",
     justifyContent: "space-around",

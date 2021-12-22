@@ -13,7 +13,7 @@ import Theme from "../themes/themes";
 
 const GameOverScreen = (props) => {
   const [ heightWindow, setHeightWindow ] = useState(Dimensions.get('window').height);
-  console.log(heightWindow, 'height')
+
 useEffect(()=>{
   const upadteWindowHeight =()=>{
     setHeightWindow(Dimensions.get('window').height);
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   reStartButton: {
-    width: Dimensions.get('window').width * 0.5,
+    width: Dimensions.get('window').width * 0.7,
     alignItems: "center",
     marginVertical: 10,
     

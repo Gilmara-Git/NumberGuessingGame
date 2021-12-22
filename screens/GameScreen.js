@@ -6,7 +6,7 @@ import {
   Alert,
   FlatList,
   Dimensions,
-  ScrollView
+
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -41,6 +41,7 @@ const GameScreen = (props) => {
   const [currentComputerGuess, setCurrentComputerGuess] =
     useState(initialGuess);
   const [pastGuess, setPastGuess] = useState([initialGuess.toString()]);
+  const [ windowHeight, setWindowHeight ] = useState(Dimensions.get('window').height);
 
   const currentMin = useRef(1);
   const currentMax = useRef(100);
@@ -81,15 +82,71 @@ const GameScreen = (props) => {
     ]);
   };
 
+useEffect(()=>{
+  const updateWindowHeight =()=>{
+    setWindowHeight(Dimensions.get('window').height);
+  }
+  Dimensions.addEventListener('change', updateWindowHeight)
+  return ()=>{
+    Dimensions.removeEventListener('change', updateWindowHeight);
+  }
+});
+
+
 // Dimensions can also be used on if checks. 
 // If height is bigger than 600, we could return a different JSX
 // if(Dimensions.get('window').height > 600 ){
 // return  <View>..........</View>
 // }
+if(windowHeight < 500 ){
+  return (
+   <View style={styles.container}>
+      <Text style={styles.oppGuess}>Opponent's Guess</Text>
+        <View style={styles.controls}>          
+            <DefaultButton
+              style={styles.down}
+              onPress={nextComputerGuessHandler.bind(this, "down")}
+              >
+              <AntDesign
+                name="downcircle"
+                size={30}
+                color={Theme.colors.mainBackground}
+                />
+            </DefaultButton>
+      
+            <NumberComponent>{currentComputerGuess}</NumberComponent>
+      
+            <DefaultButton
+              style={styles.up}
+              onPress={nextComputerGuessHandler.bind(this, "up")}
+            >
+              <AntDesign
+                name="upcircle"
+                size={30}
+                color={Theme.colors.mainBackground}
+              />
+            </DefaultButton>
+        </View> 
 
+      <View style={styles.listContainer}>
+        {/* <ScrollView 
+          showVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollViewContainer}>
+          {pastGuess.map((guess, index) => renderListItem(guess, pastGuess.length - index ))}
+        </ScrollView> */}
+        <FlatList
+          contentContainerStyle={styles.scrollViewContainer}
+          data={pastGuess}
+          renderItem={renderListItem.bind(this, pastGuess.length)}
+          keyExtractor={(item) => item}
+        />
+      </View>
+    </View>
+    )
+}
 
   return (
-    <ScrollView>
+  
     <View style={styles.container}>
       <Text style={styles.oppGuess}>Opponent's Guess</Text>
       <NumberComponent>{currentComputerGuess}</NumberComponent>
@@ -134,7 +191,7 @@ const GameScreen = (props) => {
         />
       </View>
     </View>
-    </ScrollView>
+   
   );
 };
 
@@ -143,6 +200,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 12,
+  },
+  controls:{
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "80%"
+
   },
   oppGuess: {
     fontSize: 22,

@@ -39,7 +39,7 @@ const StartGameScreen = (props) => {
    // This way we have only one EventListener
     return () =>{
       Dimensions.removeEventListener("change", updateButtonLayout);
-    };
+    }
 
   });
 

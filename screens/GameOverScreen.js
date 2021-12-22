@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { 
   View, 
   StyleSheet, 
@@ -12,11 +12,30 @@ import StartButton from "../src/components/StartButton/StartButton";
 import Theme from "../themes/themes";
 
 const GameOverScreen = (props) => {
+  const [ heightWindow, setHeightWindow ] = useState(Dimensions.get('window').height);
+  console.log(heightWindow, 'height')
+useEffect(()=>{
+  const upadteWindowHeight =()=>{
+    setHeightWindow(Dimensions.get('window').height);
+  }
+  Dimensions.addEventListener("change",upadteWindowHeight);
+  return ()=>{
+    Dimensions.removeEventListener("change",upadteWindowHeight);
+  }
+});
+
+
+  let imageStyle = styles.imageContainer;
+  if(heightWindow <=320){
+    imageStyle = styles.imageContainerLandscape;
+  }
+
+
   return (
- 
+ <ScrollView>
     <View style={styles.gameOverContainer}>
       <BodyText>The Game is Over!</BodyText>
-      <View style={styles.imageContainer}>
+      <View style={imageStyle}>
         <Image
           source={require("../assets/success.png")}
           style={styles.image}
@@ -37,7 +56,7 @@ const GameOverScreen = (props) => {
         <StartButton onPress={props.onRestartGame}>NEW GAME</StartButton>
       </View>
     </View>
- 
+    </ScrollView>
   );
 };
 
@@ -61,22 +80,32 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   imageContainer: {
-    width: Dimensions.get('window').width * 0.7,
-    height: Dimensions.get('window').width * 0.7,
-    borderRadius: Dimensions.get('window').width * 0.7 / 2,
-    borderWidth: 3,
+    width: Dimensions.get('window').width * 0.5,
+    height: Dimensions.get('window').width * 0.5,
+    borderRadius:Dimensions.get('window').width * 0.5 / 2,
+    borderWidth: 2,
     borderColor: Theme.colors.mainBlack,
     overflow: "hidden",
-    marginVertical: Dimensions.get('window').height < 550 ? 10: 30,
+    marginVertical:  Dimensions.get('window').height < 550 ? 10: 30,
+  },
+  imageContainerLandscape: {
+    width: Dimensions.get('window').width * 0.4,
+    height: Dimensions.get('window').width * 0.4,
+    borderRadius:Dimensions.get('window').width * 0.4 / 2,
+    borderWidth: 2,
+    borderColor: Theme.colors.mainBlack,
+    overflow: "hidden",
+    marginVertical:  Dimensions.get('window').height < 550 ? 10: 30,
   },
   image: {
     width: "100%",
     height: "100%",
   },
   reStartButton: {
-    width: Dimensions.get('window').width * 0.7,
+    width: Dimensions.get('window').width * 0.5,
     alignItems: "center",
-    marginTop: 10,
+    marginVertical: 10,
+    
   },
   numberResults: {
     color: Theme.colors.orangeSyneos,

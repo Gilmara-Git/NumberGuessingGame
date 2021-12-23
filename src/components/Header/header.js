@@ -1,5 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { 
+  View, 
+  Text, 
+  StyleSheet,
+  Platform,
+} from "react-native";
 import Theme from "../../../themes/themes";
 
 const Header = (props) => {
@@ -15,7 +20,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     height: 100,
     width: "100%",
-    backgroundColor: Theme.colors.orangeSyneos,
+    backgroundColor: Platform.OS === 'android' ? Theme.colors.orangeSyneos : Theme.colors.pink,
     justifyContent: "center",
     alignItems: "center",
   },

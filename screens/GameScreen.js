@@ -8,7 +8,9 @@ import {
   Dimensions,
 
 } from "react-native";
+
 import { AntDesign } from "@expo/vector-icons";
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 import NumberComponent from "../src/components/NumberComponent/NumberComponent";
 import DefaultButton from "../src/components/DefaultButton/DefaultButton";
@@ -36,6 +38,9 @@ const renderListItem = (pastGuessLength, itemData) => {
 };
 
 const GameScreen = (props) => {
+
+  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+
   const initialGuess = generateRandomBetween(1, 100, props.userNumber);
 
   const [currentComputerGuess, setCurrentComputerGuess] =

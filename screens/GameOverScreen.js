@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   Dimensions,
+
 } from "react-native";
 import BodyText from "../src/components/BodyText/BodyText";
 import StartButton from "../src/components/StartButton/StartButton";
@@ -36,75 +37,77 @@ const GameOverScreen = (props) => {
   // }
 
   return (
-    <ScrollView>
-      <View style={styles.gameOverContainer}>
-        <BodyText>The Game is Over!</BodyText>
-        <View
-          style={{
-            ...styles.imageContainer,
-            marginVertical: heightWindow < 550 ? 10 : 30,
-            width: widthWindow * 0.7,
-            height: widthWindow * 0.7,
-            borderRadius: (widthWindow * 0.7) / 2,
-          }}
-        >
-          <Image
-            source={require("../assets/success.png")}
-            style={styles.image}
-            resizeMode="cover"
-          />
-        </View>
-        <View
-          style={{
-            ...styles.resultContainer,
-            marginVertical: heightWindow < 550 ? 3 : 20,
-          }}
-        >
-          <Text
+   
+      <ScrollView>
+        <View style={styles.gameOverContainer}>
+          <BodyText>The Game is Over!</BodyText>
+          <View
             style={{
-              ...styles.resultText,
-              fontSize: heightWindow < 550 ? 13 : 18,
+              ...styles.imageContainer,
+              marginVertical: heightWindow < 550 ? 10 : 30,
+              width: widthWindow * 0.7,
+              height: widthWindow * 0.7,
+              borderRadius: (widthWindow * 0.7) / 2,
             }}
           >
-            Rounds taken:
-            <Text
-              style={{
-                ...styles.numberResults,
-                fontSize: heightWindow < 550 ? 15 : 20,
-              }}
-            >
-              {" "}
-              {props.numberOfRounds}
-            </Text>
-          </Text>
-          <Text
+            <Image
+              source={require("../assets/success.png")}
+              style={styles.image}
+              resizeMode="cover"
+            />
+          </View>
+          <View
             style={{
-              ...styles.resultText,
-              fontSize: heightWindow < 550 ? 13 : 18,
+              ...styles.resultContainer,
+              marginVertical: heightWindow < 550 ? 3 : 20,
             }}
           >
-            Your Number was:
             <Text
               style={{
-                ...styles.numberResults,
-                fontSize: heightWindow < 550 ? 15 : 20,
+                ...styles.resultText,
+                fontSize: heightWindow < 550 ? 13 : 18,
               }}
             >
-              {" "}
-              {props.userNumber}
+              Rounds taken:
+              <Text
+                style={{
+                  ...styles.numberResults,
+                  fontSize: heightWindow < 550 ? 15 : 20,
+                }}
+              >
+                {" "}
+                {props.numberOfRounds}
+              </Text>
             </Text>
-          </Text>
+            <Text
+              style={{
+                ...styles.resultText,
+                fontSize: heightWindow < 550 ? 13 : 18,
+              }}
+            >
+              Your Number was:
+              <Text
+                style={{
+                  ...styles.numberResults,
+                  fontSize: heightWindow < 550 ? 15 : 20,
+                }}
+              >
+                {" "}
+                {props.userNumber}
+              </Text>
+            </Text>
+          </View>
+          <View
+            style={{
+              ...styles.reStartButton,
+              width: widthWindow < 550 ? widthWindow * 0.7 : widthWindow * 0.5,
+            }}
+          >
+            <StartButton onPress={props.onRestartGame}>NEW GAME</StartButton>
+          </View>
         </View>
-        <View
-          style={{
-            ...styles.reStartButton,
-            width: widthWindow < 550 ? widthWindow * 0.7 : widthWindow * 0.5,
-          }}
-        >
-          <StartButton onPress={props.onRestartGame}>NEW GAME</StartButton>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    
   );
 };
 

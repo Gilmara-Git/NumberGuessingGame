@@ -74,14 +74,12 @@ export default function App() {
 
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>    
+    <SafeAreaView style={styles.container}>    
         <StatusBar style="light"/>
         <Header
           title="NUMBER GUESSING GAME" 
         />
-        {displayComponent}      
-      </View>
+        {displayComponent}   
     </SafeAreaView>
   );
 }
